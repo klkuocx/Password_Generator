@@ -5,21 +5,12 @@ function sample(array) {
 }
 
 // define generatePassword function to use in other files
-function generatePassword() {
+function generatePassword(options) {
   // define things user might want
   const lowerCaseLetters = 'abcdefghijklmnopqrstuvwxyz'
   const upperCaseLetters = lowerCaseLetters.toUpperCase()
   const numbers = '1234567890'
   const symbols = '`~!@$%^&*()-_+={}[]|;:"<>,.?/'
-
-  // define dummy data
-  const options = {
-    length: '12',
-    lowercase: 'on',
-    uppercase: 'on',
-    numbers: 'on',
-    excludeCharacters: 'Ak47'
-  }
 
   // create a collection to store things user picked up
   let collection = []
@@ -47,18 +38,18 @@ function generatePassword() {
     )
   }
 
-  console.log('collection:', collection)
+  if (collection.length === 0) {
+    return 'there is no valid characters in your selection.'
+  }
 
   // start generating password
   let password = ''
   for (i = 0; i < Number(options.length); i++) {
     password += sample(collection)
   }
-  console.log(password)
-
 
   // return the generated password
-  console.log('This will generate random password.')
+  return password
 }
 
-generatePassword()
+module.exports = generatePassword
